@@ -46,15 +46,15 @@ public class DataGenerator {
 
     public static Registration generateInvalidLoginForCustomer() {
         Faker faker = new Faker(new Locale("en"));
-        Registration invalidLogin = new Registration("invalidLogin",faker.internet().password(),"active");
+        Registration invalidLogin = new Registration("логин",faker.internet().password(),"active");
         requestForm(invalidLogin);
-        return invalidLogin;
+        return new Registration("логин",faker.internet().password(),"active");
     }
 
     public static Registration generateInvalidPasswordForCustomer() {
         Faker faker = new Faker(new Locale("en"));
-        Registration invalidPassword = new Registration(faker.name().firstName(),"invalidPassword","active");
+        Registration invalidPassword = new Registration(faker.name().firstName(),"пароль","active");
         requestForm(invalidPassword);
-        return invalidPassword;
+        return new Registration(faker.name().firstName(),"пароль","active");
     }
 }
