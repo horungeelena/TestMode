@@ -19,25 +19,25 @@ public class RegistrationTest {
     }
 
     @Test
-    void activeValidCustomer() {
-        Registration customer = generateValidActiveCustomer();
-        $("[data-test-id=login] input").setValue(customer.getLogin());
-        $("[data-test-id=password] input").setValue(customer.getPassword());
+    void shouldSuccessfulLoginWithActiveValidCustomer() {
+        Registration validActiveCustomer = generateCustomer("active");
+        $("[data-test-id=login] input").setValue(validActiveCustomer.getLogin());
+        $("[data-test-id=password] input").setValue(validActiveCustomer.getPassword());
         $(byText("Продолжить")).click();
-        $(withText("Личный кабинет")).waitUntil(Condition.visible,15000);
+        $(withText("Личный кабинет")).waitUntil(Condition.visible, 15000);
     }
 
     @Test
-    void blockedValidCustomer() {
-        Registration customer = generateValidBlockedCustomer();
-        $("[data-test-id=login] input").setValue(customer.getLogin());
-        $("[data-test-id=password] input").setValue(customer.getPassword());
+    void shouldSuccessfulLoginWithBlockedValidCustomer() {
+        Registration validActiveCustomer = generateCustomer("blocked");
+        $("[data-test-id=login] input").setValue(validActiveCustomer.getLogin());
+        $("[data-test-id=password] input").setValue(validActiveCustomer.getPassword());
         $(byText("Продолжить")).click();
         $(withText("Пользователь заблокирован")).waitUntil(Condition.visible, 15000);
     }
 
     @Test
-    void invalidLoginActiveForCustomer() {
+    void shouldInvalidLoginForActiveCustomer() {
         Registration customer = generateInvalidLoginForCustomer();
         $("[data-test-id=login] input").setValue(customer.getLogin());
         $("[data-test-id=password] input").setValue(customer.getPassword());
@@ -46,7 +46,7 @@ public class RegistrationTest {
     }
 
     @Test
-    void invalidPasswordActiveForCustomer() {
+    void shouldInvalidPasswordForActiveCustomer() {
         Registration customer = generateInvalidPasswordForCustomer();
         $("[data-test-id=login] input").setValue(customer.getLogin());
         $("[data-test-id=password] input").setValue(customer.getPassword());

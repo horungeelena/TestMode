@@ -31,16 +31,10 @@ public class DataGenerator {
                 .statusCode(200);
     }
 
-    public static Registration generateValidActiveCustomer() {
-        Registration validActiveCustomer = new Registration(faker.name().firstName(),faker.internet().password(),"active");
-        requestForm(validActiveCustomer);
-        return validActiveCustomer;
-    }
-
-    public static Registration generateValidBlockedCustomer() {
-        Registration validBlockedCustomer = new Registration(faker.name().firstName(),faker.internet().password(),"blocked");
-        requestForm(validBlockedCustomer);
-        return validBlockedCustomer;
+    public static Registration generateCustomer(String status) {
+        Registration customer = new Registration(faker.name().firstName(),faker.internet().password(),status);
+        requestForm(customer);
+        return customer;
     }
 
     public static Registration generateInvalidLoginForCustomer() {
