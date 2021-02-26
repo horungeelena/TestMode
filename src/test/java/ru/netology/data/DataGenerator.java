@@ -11,6 +11,8 @@ import java.util.Locale;
 import static io.restassured.RestAssured.given;
 
 public class DataGenerator {
+    static Faker faker = new Faker(new Locale("en"));
+
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
             .setPort(9999)
@@ -18,7 +20,6 @@ public class DataGenerator {
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
             .build();
-
 
     public static void requestForm(Registration registration) {
         given()
@@ -31,30 +32,26 @@ public class DataGenerator {
     }
 
     public static Registration generateValidActiveCustomer() {
-        Faker faker = new Faker(new Locale("en"));
         Registration validActiveCustomer = new Registration(faker.name().firstName(),faker.internet().password(),"active");
         requestForm(validActiveCustomer);
         return validActiveCustomer;
     }
 
     public static Registration generateValidBlockedCustomer() {
-        Faker faker = new Faker(new Locale("en"));
         Registration validBlockedCustomer = new Registration(faker.name().firstName(),faker.internet().password(),"blocked");
         requestForm(validBlockedCustomer);
         return validBlockedCustomer;
     }
 
     public static Registration generateInvalidLoginForCustomer() {
-        Faker faker = new Faker(new Locale("en"));
         Registration invalidLogin = new Registration("логин",faker.internet().password(),"active");
         requestForm(invalidLogin);
-        return new Registration("логин",faker.internet().password(),"active");
+        return new Registration(faker.name().firstName(),"пароль","active");
     }
 
     public static Registration generateInvalidPasswordForCustomer() {
-        Faker faker = new Faker(new Locale("en"));
         Registration invalidPassword = new Registration(faker.name().firstName(),"пароль","active");
         requestForm(invalidPassword);
-        return new Registration(faker.name().firstName(),"пароль","active");
+        return new Registration("логин",faker.internet().password(),"active");
     }
 }
